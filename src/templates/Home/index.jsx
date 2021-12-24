@@ -1,4 +1,4 @@
-import { Component, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import './styles.css';
 import { Posts } from '../../component/Posts';
@@ -8,25 +8,20 @@ import { Button } from '../../component/Button';
 import { TextInput } from '../../component/TextInput';
 
 export const Home = () => { 
-  /*
-  posts: [],
-  allPosts: [],
-  page: 0,
-  postsPerPage: 10,
-  searchValue: ''
-   */
+  
   let d = new Date().toLocaleString('pt-br')
-  const [date, setDate] = useState(d);
+  const [date] = useState(d);
   const [posts, setPosts] = useState([])  
   const [allPosts, setAllPosts] = useState([])
   const [page, setPage] = useState(0)
   const [postsPerPage, setPostsPerPage] = useState(3)
   const [searchValue, setSearchValue] = useState('')
+  
   const noMorePosts = page + postsPerPage >= allPosts.length;  
 
   const filteredPosts = !!searchValue ? 
       allPosts.filter((post)=> {
-        return post.title.toLowerCase().includes(searchValue.toLowerCase());
+        return post.titulo.toLowerCase().includes(searchValue.toLowerCase());
       })
       : 
       posts;
@@ -39,7 +34,7 @@ export const Home = () => {
         setPosts(postsAndPhotos.slice(page, postsPerPage));
         setAllPosts(postsAndPhotos)
         setPostsPerPage(3)
-        setDate(d);
+        
         
       },[])
     
@@ -60,7 +55,8 @@ export const Home = () => {
       }
 
       useEffect(() => {        
-        HandleLoadPosts(page, postsPerPage)
+        HandleLoadPosts(0, postsPerPage)
+        console.log('oi...')
       },[HandleLoadPosts, postsPerPage]);
 
   return (
@@ -83,7 +79,7 @@ export const Home = () => {
         <Posts posts = {filteredPosts} />
       )}
       {filteredPosts.length === 0 && (
-        <h3>Não existem posts <span className='s-emoji'>🥴</span><span className='s-emoji'>😓</span></h3>
+        <h3>Não exist posts <span className='s-emoji'>🥴</span><span className='s-emoji'>😓</span></h3>
       )}
 
       
@@ -91,7 +87,7 @@ export const Home = () => {
         {!searchValue && (
 
             <Button 
-            text='Load more posts chamado'
+            text='Load more posts called'
             onClick = { loadMorePosts }
             disabled = {noMorePosts}
             />
@@ -103,6 +99,7 @@ export const Home = () => {
     </section>
     );
 }
+/*
 class Home2 extends Component {
   state = {
     posts: [],
@@ -187,7 +184,7 @@ class Home2 extends Component {
           <Posts posts = {filteredPosts} />
         )}
         {filteredPosts.length === 0 && (
-          <h3>Não existem posts <span className='s-emoji'>🥴</span><span className='s-emoji'>😓</span></h3>
+          <h3>Não exist posts <span className='s-emoji'>🥴</span><span className='s-emoji'>😓</span></h3>
         )}
 
         
@@ -195,7 +192,7 @@ class Home2 extends Component {
           {!searchValue && (
 
               <Button 
-              text='Load more posts chamado'
+              text='Load more posts called'
               onClick = { this.loadMorePosts }
               disabled = {noMorePosts}
               />
@@ -209,5 +206,5 @@ class Home2 extends Component {
 
   }  
 }
-
+*/
 export default Home;

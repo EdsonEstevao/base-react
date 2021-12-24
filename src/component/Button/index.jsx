@@ -11,9 +11,7 @@ export class Button extends Component {
                 className="button" 
                 onClick={onClick}
                 disabled = {disabled}
-            >
-                
-                
+            >   
                 {text}
                 
             </button>

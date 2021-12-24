@@ -4,12 +4,13 @@ import './styles.css'
 export const Posts = ({ posts }) => {
     return (
         <div className='posts'>          
-            {posts.map((post,i)=> (              
+            {posts.map((post,i)=> ( 
+                
                 <PostCard 
-                    title = {post.title}
+                    title = {post.titulo}
                     body = {post.body}
-                    id= {post.id}
-                    cover = {post.cover}
+                    id= {i}
+                    cover = {post.avatar}
                     key={i}
                 />                
             ))}            
